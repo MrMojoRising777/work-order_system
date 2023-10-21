@@ -27,6 +27,6 @@
 
         <!-- Additional form fields -->
 
-        <button type="submit">Create Work Order</button>
+        <button type="submit" class="btn">Create Work Order</button>
     </form>
 @endsection
