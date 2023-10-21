@@ -6,7 +6,7 @@
     <title>Your Work Order System</title>
     
     <!-- CSS stylesheets and scripts -->
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 </head>
 <body>
     <header>
