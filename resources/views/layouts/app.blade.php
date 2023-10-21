@@ -7,6 +7,9 @@
     
     <!-- CSS stylesheets and scripts -->
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+
+    <!-- MaterializeCSS CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/materialize.min.css') }}">
 </head>
 <body>
     <header>
@@ -28,6 +31,9 @@
     </footer>
 
     <!-- JavaScript scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+    <!-- <script src="{{ asset('assets/js/script.js') }}"></script> -->
+
+    <!-- MaterializeCSS JavaScript -->
+    <script src="{{ asset('assets/js/materialize.min.js') }}"></script>
 </body>
 </html>
