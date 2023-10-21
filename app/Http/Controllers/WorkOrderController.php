@@ -40,9 +40,11 @@ class WorkOrderController extends Controller
     }
 
     // Show: Display specific work order
-    public function show(WorkOrder $workOrder)
+    public function show($id)
     {
-        return view('workorders.show', compact('workOrder'));
+        $workOrder = WorkOrder::find($id);
+
+        return view('workorders.show', ['workOrder' => $workOrder]);
     }
 
     // Other methods: Update, edit, delete, etc.
