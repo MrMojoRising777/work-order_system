@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::resource('workorders', WorkOrderController::class);
+Route::get('/workorders/filter', 'WorkOrderController@filter')->name('workorders.filter');

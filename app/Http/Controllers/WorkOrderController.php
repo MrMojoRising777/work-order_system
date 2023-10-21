@@ -8,10 +8,24 @@ use App\Models\WorkOrder;
 class WorkOrderController extends Controller
 {
     // Index: Show list of work orders
-    public function index()
+    public function index(Request $request)
     {
-        $workOrders = WorkOrder::orderBy('start_date', 'desc')->get();
+        // If no filter parameter, show all work orders
+        $status = $request->query('status', 'all');
+        if ($status === 'all') {
+            $workOrders = WorkOrder::orderBy('start_date', 'desc')->get();
+        } else {
+            // Filter by the specified status
+            $workOrders = WorkOrder::where('status', $status)->orderBy('start_date', 'desc')->get();
+        }
         return view('workorders.index', compact('workOrders'));
+    }
+
+    // Filter: get open/closed orders
+    public function filter(Request $request)
+    {
+        $status = $request->query('status', 'all');
+        return redirect()->route('workorders.index', ['status' => $status]);
     }
 
     // Create: Show work order creation form

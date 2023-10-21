@@ -17,7 +17,7 @@ return new class extends Migration
             $table->dateTime('end_date'); // end date and time
             $table->string('employee_name'); // employee
             $table->text('notes')->nullable(); // notes
-            $table->enum('status', ['open', 'completed', 'other'])->default('open'); // status of order
+            $table->enum('status', ['open', 'completed','other'])->default('open'); // status of order
             $table->text('image_paths')->nullable(); // image paths (multiple paths JSON or serialized data)
             $table->timestamps(); // created_at and updated_at
 
