@@ -5,6 +5,15 @@
 
     <a href="{{ route('workorders.create') }}" class="btn">Create Work Order</a>
 
+    <form action="{{ route('workorders.index') }}" method="get">
+        <label for="status">Filter by Status:</label>
+        <select name="status[]" id="status" multiple>
+            <option value="open" {{ in_array('open', $status) ? 'selected' : '' }}>Open</option>
+            <option value="completed" {{ in_array('completed', $status) ? 'selected' : '' }}>Completed</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Apply Filter</button>
+    </form>
+
     <table>
         <thead>
             <tr>

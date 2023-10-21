@@ -19,8 +19,6 @@
         <nav>
             <ul>
                 <li><a href="{{ route('workorders.index') }}">All Orders</a></li>
-                <li><a href="{{ route('workorders.filter', ['status' => 'open']) }}">Open Orders</a></li>
-                <li><a href="{{ route('workorders.filter', ['status' => 'closed']) }}">Closed Orders</a></li>
             </ul>
         </nav>
     </header>
