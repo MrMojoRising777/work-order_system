@@ -3,7 +3,7 @@
 @section('content')
     <h1>Create Work Order</h1>
 
-    <form method="POST" action="{{ route('workorders.store') }}">
+    <form method="POST" action="{{ route('workorders.store') }}" enctype="multipart/form-data">
         @csrf
 
         <label for="start_date">Start Date:</label>
@@ -25,7 +25,8 @@
             <option value="other">Other</option>
         </select>
 
-        <!-- Additional form fields -->
+        <label for="image">Image:</label>
+        <input type="file" name="image" accept="image/*">
 
         <button type="submit" class="btn">Create Work Order</button>
     </form>

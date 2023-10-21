@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WorkOrder;
+use Illuminate\Support\Facades\Storage;
 
 class WorkOrderController extends Controller
 {
@@ -29,20 +30,38 @@ class WorkOrderController extends Controller
     // Store: Save new work order
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        // Validate data
+        $request->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'employee_name' => 'required|string',
             'notes' => 'nullable|string',
             'status' => 'required|in:open,completed,other',
-            'image_paths' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the image validation rules as needed
         ]);
-
-        $workOrder = WorkOrder::create($validatedData);
-
-        // Handle image uploads
-
-        return redirect()->route('workorders.index')->with('success', 'Work order created successfully.');
+    
+        // Check if an image was uploaded
+        if ($request->hasFile('image')) {
+            // Store the uploaded image in the 'public/images' directory
+            $imagePath = $request->file('image')->store('public/images');
+    
+            // Generate a public URL for the stored image
+            $imageUrl = Storage::url($imagePath);
+        } else {
+            $imageUrl = null;
+        }
+    
+        // Create a new Work Order with the provided data and image URL
+        WorkOrder::create([
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'employee_name' => $request->input('employee_name'),
+            'notes' => $request->input('notes'),
+            'status' => $request->input('status'),
+            'image_url' => $imageUrl,
+        ]);
+    
+        return redirect()->route('workorders.index')->with('success', 'Work Order created successfully');
     }
 
     // Show: Display specific work order

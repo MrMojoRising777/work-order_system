@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('employee_name'); // employee
             $table->text('notes')->nullable(); // notes
             $table->enum('status', ['open', 'completed','other'])->default('open'); // status of order
-            $table->text('image_paths')->nullable(); // image paths (multiple paths JSON or serialized data)
+            $table->string('image_url')->nullable(); // image paths (multiple paths JSON or serialized data)
             $table->timestamps(); // created_at and updated_at
 
             $table->index(['start_date', 'end_date']); // Index for date range queries

@@ -13,6 +13,6 @@ class WorkOrder extends Model
         'employee_name',
         'notes',
         'status',
-        'image_paths',
+        'image_url',
     ];
 }

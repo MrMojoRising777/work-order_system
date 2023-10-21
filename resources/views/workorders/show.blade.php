@@ -10,6 +10,11 @@
     <p>Status: {{ $workOrder->status }}</p>
     <p>Notes: {{ $workOrder->notes }}</p>
 
+    <!-- Display image if image_url is not null -->
+    @if ($workOrder->image_url)
+        <img src="{{ asset($workOrder->image_url) }}" alt="Work Order Image" class="responsive-img">
+    @endif
+
     <a href="{{ route('workorders.edit', $workOrder) }}" class="btn">Edit</a>
 
     <form action="{{ route('workorders.destroy', $workOrder->id) }}" method="POST" style="display: inline;">
