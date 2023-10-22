@@ -8,10 +8,10 @@
         @method('PUT')
 
         <label for="start_date">Start Date:</label>
-        <input type="date" name="start_date" value="{{ $workOrder->start_date }}" required>
+        <input type="datetime-local" name="start_date" value="{{ $workOrder->start_date }}" required>
 
         <label for="end_date">End Date:</label>
-        <input type="date" name="end_date" value="{{ $workOrder->end_date }}" required>
+        <input type="datetime-local" name="end_date" value="{{ $workOrder->end_date }}" required>
 
         <label for="employee_name">Employee:</label>
         <input type="text" name="employee_name" value="{{ $workOrder->employee_name }}" required>

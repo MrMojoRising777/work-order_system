@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\WorkOrder;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Carbon;
 
 class WorkOrderController extends Controller
 {
@@ -37,24 +38,27 @@ class WorkOrderController extends Controller
             'employee_name' => 'required|string',
             'notes' => 'nullable|string',
             'status' => 'required|in:open,completed,other',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the image validation rules as needed
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
-        // Check if an image was uploaded
+
+
+        // Check if image was uploaded
         if ($request->hasFile('image')) {
-            // Store the uploaded image in the 'public/images' directory
+            // Store uploaded image in 'public/images'
             $imagePath = $request->file('image')->store('public/images');
     
-            // Generate a public URL for the stored image
+            // Generate public URL for stored image
             $imageUrl = Storage::url($imagePath);
         } else {
             $imageUrl = null;
         }
     
-        // Create a new Work Order with the provided data and image URL
+        // Create new WorkOrder
         WorkOrder::create([
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
+            'worktime' => $worktime,
             'employee_name' => $request->input('employee_name'),
             'notes' => $request->input('notes'),
             'status' => $request->input('status'),
@@ -68,6 +72,13 @@ class WorkOrderController extends Controller
     public function show($id)
     {
         $workOrder = WorkOrder::find($id);
+
+        // Convert start_date and end_date strings to Carbon instances
+        $start_date = Carbon::parse($workOrder->start_date);
+        $end_date = Carbon::parse($workOrder->end_date);
+
+        // Calculate worktime
+        $workOrder->worktime = $end_date->diffInMinutes($start_date);
 
         return view('workorders.show', ['workOrder' => $workOrder]);
     }
@@ -94,10 +105,6 @@ class WorkOrderController extends Controller
 
         $workOrder = WorkOrder::find($id);
 
-        if (!$workOrder) {
-            // Handle when work order not found
-        }
-
         $workOrder->update($validatedData);
 
         // Handle image uploads
@@ -109,10 +116,6 @@ class WorkOrderController extends Controller
     public function destroy($id)
     {
         $workOrder = WorkOrder::find($id);
-
-        if (!$workOrder) {
-            // Handle when the work order not found
-        }
 
         $workOrder->delete();
 
