@@ -70,7 +70,7 @@ php artisan serve
 This will start a local server, and you can access your application in your web browser at 'http://localhost:8000'.
 
 ## Additional information
-For more information on configuring Laravel and using its features, please refer to the Laravel documentation.
+For more information on configuring Laravel and using its features, please refer to the [Laravel documentation](https://laravel.com/docs/10.x).
 
 Enjoy working on your Laravel project! If you have any questions or need further assistance, feel free to reach out to us.
 
