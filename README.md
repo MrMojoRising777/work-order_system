@@ -19,19 +19,29 @@ Before you begin, make sure you have the following software and tools installed:
 ## Project setup
 
 1. Clone the repository to your local machine:
+```
 git clone https://github.com/yourusername/your-laravel-project.git
+```
 
 2. Change into the project directory:
+```
 cd your-laravel-project
+```
 
 3. Install the project dependencies using Composer:
+```
 composer install
+```
 
 4. Create a copy of the .env file:
+```
 cp .env.example .env
+```
 
 5. Generate a new application key:
+```
 php artisan key:generate
+```
 
 6. Configure the .env file with your database credentials and other environment-specific settings.
 
@@ -39,17 +49,23 @@ php artisan key:generate
 To use local image storage, Laravel already comes with a built-in storage system. By default, it stores files in the storage/app/public directory. To set up local image storage:
 
 1. Create a symbolic link from the public directory to the storage directory. This will make the images accessible via a public URL:
+```
 php artisan storage:link
+```
 
 2. Update your .env file to set the FILESYSTEM_DRIVER to public:
+```
 FILESYSTEM_DRIVER=public
+```
 
 3. You can store and retrieve images using Laravel's storage system, and they will be saved in the storage/app/public directory, which is linked to the public directory.
 
 ## Running the Project
 
 To run your Laravel project, you can use the built-in development server:
+```
 php artisan serve
+```
 
 This will start a local server, and you can access your application in your web browser at 'http://localhost:8000'.
 
