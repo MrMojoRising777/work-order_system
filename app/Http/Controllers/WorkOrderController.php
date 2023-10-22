@@ -58,7 +58,6 @@ class WorkOrderController extends Controller
         WorkOrder::create([
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
-            'worktime' => $worktime,
             'employee_name' => $request->input('employee_name'),
             'notes' => $request->input('notes'),
             'status' => $request->input('status'),
