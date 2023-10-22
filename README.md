@@ -7,59 +7,56 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Prerequisites
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Before you begin, make sure you have the following software and tools installed:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Composer
+- PHP
+- Laravel
+- Git
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Project setup
 
-## Learning Laravel
+1. Clone the repository to your local machine:
+git clone https://github.com/yourusername/your-laravel-project.git
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. Change into the project directory:
+cd your-laravel-project
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. Install the project dependencies using Composer:
+composer install
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. Create a copy of the .env file:
+cp .env.example .env
 
-## Laravel Sponsors
+5. Generate a new application key:
+php artisan key:generate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+6. Configure the .env file with your database credentials and other environment-specific settings.
 
-### Premium Partners
+### Local Image Storage Setup
+To use local image storage, Laravel already comes with a built-in storage system. By default, it stores files in the storage/app/public directory. To set up local image storage:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+1. Create a symbolic link from the public directory to the storage directory. This will make the images accessible via a public URL:
+php artisan storage:link
 
-## Contributing
+2. Update your .env file to set the FILESYSTEM_DRIVER to public:
+FILESYSTEM_DRIVER=public
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. You can store and retrieve images using Laravel's storage system, and they will be saved in the storage/app/public directory, which is linked to the public directory.
 
-## Code of Conduct
+## Running the Project
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+To run your Laravel project, you can use the built-in development server:
+php artisan serve
 
-## Security Vulnerabilities
+This will start a local server, and you can access your application in your web browser at 'http://localhost:8000'.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Additional information
+For more information on configuring Laravel and using its features, please refer to the Laravel documentation.
+
+Enjoy working on your Laravel project! If you have any questions or need further assistance, feel free to reach out to us.
 
 ## License
 
