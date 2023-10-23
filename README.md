@@ -20,12 +20,12 @@ Before you begin, make sure you have the following software and tools installed:
 
 1. Clone the repository to your local machine:
 ```
-git clone https://github.com/yourusername/your-laravel-project.git
+git clone [https://github.com/yourusername/your-laravel-project.git](https://github.com/MrMojoRising777/work-order_system.git)
 ```
 
 2. Change into the project directory:
 ```
-cd your-laravel-project
+cd work-order_system
 ```
 
 3. Install the project dependencies using Composer:
