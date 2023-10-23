@@ -15,6 +15,7 @@ Before you begin, make sure you have the following software and tools installed:
 - PHP
 - Laravel
 - Git
+- XAMMP
 
 ## Project setup
 
@@ -45,7 +46,7 @@ php artisan key:generate
 
 6. Configure the .env file with your database credentials and other environment-specific settings.
 
-7. Execute the migrations:
+7. Execute the migrations (Be sure to have an active connection w/ Apache & MySQL using XAMPP) :
 ```
 php artisan migrate
 ```
