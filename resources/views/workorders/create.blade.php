@@ -26,7 +26,7 @@
         </select>
 
         <label for="image">Image:</label>
-        <input type="file" name="image" accept="image/*">
+        <input type="file" name="images[]" accept="image/*">
 
         <button type="submit" class="btn">Create Work Order</button>
     </form>

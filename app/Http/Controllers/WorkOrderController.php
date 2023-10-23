@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\WorkOrder;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use App\Models\WorkOrder;
+use App\Models\WorkOrderImage;
 
 class WorkOrderController extends Controller
 {
@@ -38,32 +39,41 @@ class WorkOrderController extends Controller
             'employee_name' => 'required|string',
             'notes' => 'nullable|string',
             'status' => 'required|in:open,completed,other',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate each image in the 'images' array
         ]);
-    
 
-
-        // Check if image was uploaded
-        if ($request->hasFile('image')) {
-            // Store uploaded image in 'public/images'
-            $imagePath = $request->file('image')->store('public/images');
-    
-            // Generate public URL for stored image
-            $imageUrl = Storage::url($imagePath);
-        } else {
-            $imageUrl = null;
-        }
-    
-        // Create new WorkOrder
-        WorkOrder::create([
+        // Create a new WorkOrder
+        $workOrder = WorkOrder::create([
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
             'employee_name' => $request->input('employee_name'),
             'notes' => $request->input('notes'),
             'status' => $request->input('status'),
-            'image_url' => $imageUrl,
         ]);
-    
+
+        dd($workOrder);
+
+        // Save the WorkOrder instance
+        $workOrder->save();
+
+        // Check if images were uploaded
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                // Store each uploaded image in 'public/images'
+                $imagePath = $image->store('public/images');
+
+                // Generate public URL for stored image
+                $imageUrl = Storage::url($imagePath);
+
+                // Create a new WorkOrderImage and associate it with the WorkOrder
+                $workOrderImage = new WorkOrderImage(['url' => $imageUrl]);
+
+                dd($workOrderImage);
+
+                $workOrder->images()->save($workOrderImage);
+            }
+        }
+
         return redirect()->route('workorders.index')->with('success', 'Work Order created successfully');
     }
 

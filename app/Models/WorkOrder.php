@@ -13,6 +13,10 @@ class WorkOrder extends Model
         'employee_name',
         'notes',
         'status',
-        'image_url',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(WorkOrderImage::class);
+    }
 }
