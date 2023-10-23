@@ -45,6 +45,11 @@ php artisan key:generate
 
 6. Configure the .env file with your database credentials and other environment-specific settings.
 
+7. Execute the migrations:
+```
+php artisan migrate
+```
+
 ### Local Image Storage Setup
 To use local image storage, Laravel already comes with a built-in storage system. By default, it stores files in the storage/app/public directory. To set up local image storage:
 
