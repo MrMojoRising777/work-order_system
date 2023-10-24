@@ -28,6 +28,6 @@
     <form action="{{ route('workorders.destroy', $workOrder->id) }}" method="POST" style="display: inline;">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this work order?')">Delete</button>
+        <button type="submit" class="btn red" onclick="return confirm('Are you sure you want to delete this work order?')">Delete</button>
     </form>
 @endsection

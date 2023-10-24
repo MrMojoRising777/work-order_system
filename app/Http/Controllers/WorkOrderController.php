@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use App\Models\WorkOrder;
-use App\Models\WorkOrderImage;
 
 class WorkOrderController extends Controller
 {
@@ -39,10 +38,10 @@ class WorkOrderController extends Controller
             'employee_name' => 'required|string',
             'notes' => 'nullable|string',
             'status' => 'required|in:open,completed,other',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate each image in the 'images' array
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Create a new WorkOrder
+        // Create new WorkOrder
         $workOrder = WorkOrder::create([
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
@@ -57,7 +56,7 @@ class WorkOrderController extends Controller
                 // Store each uploaded image in 'public/work_order_images'
                 $imagePath = $image->store('work_order_images', 'public');
 
-                $workOrder->images()->create(['url' => $imagePath]); // Use 'url' instead of 'path'
+                $workOrder->images()->create(['url' => $imagePath]);
             }
         }
 
@@ -90,18 +89,27 @@ class WorkOrderController extends Controller
     // Update: Update specific work order
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        // Validate data
+        $request->validate([
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'employee_name' => 'required|string',
             'notes' => 'nullable|string',
             'status' => 'required|in:open,completed,other',
-            'image_paths' => 'nullable|string',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        // Find WorkOrder
         $workOrder = WorkOrder::find($id);
 
-        $workOrder->update($validatedData);
+        // Update WorkOrder
+        $workOrder->update([
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'employee_name' => $request->input('employee_name'),
+            'notes' => $request->input('notes'),
+            'status' => $request->input('status'),
+        ]);
 
         // Handle image uploads
         if ($request->hasFile('images')) {

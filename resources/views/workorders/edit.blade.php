@@ -3,7 +3,7 @@
 @section('content')
     <h1>Edit Work Order</h1>
 
-    <form action="{{ route('workorders.update', $workOrder->id) }}" method="post">
+    <form action="{{ route('workorders.update', $workOrder->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -26,11 +26,10 @@
             <option value="other" @if ($workOrder->status === 'other') selected @endif>Other</option>
         </select>
 
-        <label for="images">Add Images:</label>
         <input type="file" name="images[]" accept="image/*" multiple>
 
-        <h2>Current Images:</h2>
         @if ($workOrder->images->count() > 0)
+        <h2>Current Images:</h2>
             <div class="image-gallery">
                 @foreach ($workOrder->images as $image)
                     <div class="image">
@@ -46,6 +45,6 @@
             <p>No images associated with this work order.</p>
         @endif
 
-        <button type="submit">Update</button>
+        <button type="submit" class="btn">Update</button>
     </form>
 @endsection

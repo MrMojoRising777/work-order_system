@@ -25,7 +25,6 @@
             <option value="other">Other</option>
         </select>
 
-        <label for="image">Image:</label>
         <input type="file" name="images[]" accept="image/*" multiple>
 
         <button type="submit" class="btn">Create Work Order</button>
