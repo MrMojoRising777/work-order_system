@@ -15,17 +15,18 @@ Before you begin, make sure you have the following software and tools installed:
 - PHP
 - Laravel
 - Git
+- XAMMP
 
 ## Project setup
 
 1. Clone the repository to your local machine:
 ```
-git clone https://github.com/yourusername/your-laravel-project.git
+git clone [https://github.com/yourusername/your-laravel-project.git](https://github.com/MrMojoRising777/work-order_system.git)
 ```
 
 2. Change into the project directory:
 ```
-cd your-laravel-project
+cd work-order_system
 ```
 
 3. Install the project dependencies using Composer:
@@ -44,6 +45,11 @@ php artisan key:generate
 ```
 
 6. Configure the .env file with your database credentials and other environment-specific settings.
+
+7. Execute the migrations (Be sure to have an active connection w/ Apache & MySQL using XAMPP) :
+```
+php artisan migrate
+```
 
 ### Local Image Storage Setup
 To use local image storage, Laravel already comes with a built-in storage system. By default, it stores files in the storage/app/public directory. To set up local image storage:
