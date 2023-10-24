@@ -13,8 +13,14 @@
     <p>Total work hours: {{ $workOrder->worktime }} minutes</p>
 
     <!-- Display image if image_url is not null -->
-    @if ($workOrder->image_url)
-        <img src="{{ asset($workOrder->image_url) }}" alt="Work Order Image" class="responsive-img">
+    @if ($workOrder->images->count() > 0)
+        <div class="image-gallery">
+            @foreach ($workOrder->images as $image)
+                <img src="{{ asset('storage/' . $image->url) }}" alt="Work Order Image" class="responsive-img">
+            @endforeach
+        </div>
+    @else
+        <p>No images associated with this work order.</p>
     @endif
 
     <a href="{{ route('workorders.edit', $workOrder) }}" class="btn">Edit</a>

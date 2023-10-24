@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class WorkOrderImage extends Model
 {
     protected $fillable = [
-        'workorder_id',
         'url',
     ];
 

@@ -51,26 +51,13 @@ class WorkOrderController extends Controller
             'status' => $request->input('status'),
         ]);
 
-        dd($workOrder);
-
-        // Save the WorkOrder instance
-        $workOrder->save();
-
         // Check if images were uploaded
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                // Store each uploaded image in 'public/images'
-                $imagePath = $image->store('public/images');
+                // Store each uploaded image in 'public/work_order_images'
+                $imagePath = $image->store('work_order_images', 'public');
 
-                // Generate public URL for stored image
-                $imageUrl = Storage::url($imagePath);
-
-                // Create a new WorkOrderImage and associate it with the WorkOrder
-                $workOrderImage = new WorkOrderImage(['url' => $imageUrl]);
-
-                dd($workOrderImage);
-
-                $workOrder->images()->save($workOrderImage);
+                $workOrder->images()->create(['url' => $imagePath]); // Use 'url' instead of 'path'
             }
         }
 
@@ -128,6 +115,6 @@ class WorkOrderController extends Controller
 
         $workOrder->delete();
 
-        // Success message
+        return redirect()->route('workorders.index')->with('success', 'Work order successfully deleted.');
     }
 }
