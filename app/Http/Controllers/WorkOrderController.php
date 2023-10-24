@@ -104,6 +104,19 @@ class WorkOrderController extends Controller
         $workOrder->update($validatedData);
 
         // Handle image uploads
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                // Store each uploaded image in 'public/work_order_images'
+                $imagePath = $image->store('work_order_images', 'public');
+    
+                $workOrder->images()->create(['url' => $imagePath]);
+            }
+        }
+
+        // Handle image deletions
+        if ($request->has('delete_images')) {
+            $workOrder->images()->whereIn('id', $request->delete_images)->delete();
+        }
 
         return redirect()->route('workorders.index')->with('success', 'Work order updated successfully.');
     }

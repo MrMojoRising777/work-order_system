@@ -26,8 +26,25 @@
             <option value="other" @if ($workOrder->status === 'other') selected @endif>Other</option>
         </select>
 
-        <label for="image_paths">Image Paths:</label>
-        <input type="text" name="image_paths" value="{{ $workOrder->image_paths }}">
+        <label for="images">Add Images:</label>
+        <input type="file" name="images[]" accept="image/*" multiple>
+
+        <h2>Current Images:</h2>
+        @if ($workOrder->images->count() > 0)
+            <div class="image-gallery">
+                @foreach ($workOrder->images as $image)
+                    <div class="image">
+                        <img src="{{ asset('storage/' . $image->url) }}" alt="Work Order Image" class="responsive-img">
+                        <label for="delete_image_{{ $image->id }}">
+                            <input type="checkbox" id="delete_image_{{ $image->id }}" name="delete_images[]" value="{{ $image->id }}" />
+                            <span>Delete</span>
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p>No images associated with this work order.</p>
+        @endif
 
         <button type="submit">Update</button>
     </form>
